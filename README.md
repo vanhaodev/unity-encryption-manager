@@ -155,6 +155,86 @@ Open **Tools > Encryption Manager > Test UI** in Unity Editor to test encryption
 | `HashAsync(type, data)` | Async hash (background thread) |
 | `VerifyAsync(type, data, hash)` | Async verify (background thread) |
 
-## License
+## Example Code
 
-MIT License
+Create a new script `EMExample.cs` and attach to any GameObject:
+
+```csharp
+using UnityEngine;
+using vanhaodev.encryptionmanager;
+
+public class EMExample : MonoBehaviour
+{
+    [Header("XOR Settings")]
+    public byte xorKey = 0x5A;
+
+    [Header("AES Settings")]
+    public string aesKey = "MySecretKey123";
+
+    void Start()
+    {
+        string lyrics = "'Cause I know what you like boy\nYou're my chemical hype boy";
+
+        TestXor(lyrics);
+        TestAes(lyrics);
+        TestHash(lyrics);
+    }
+
+    void TestXor(string original)
+    {
+        Debug.Log("=== XOR Test ===");
+
+        // Register XOR encryption with a single byte key
+        EncryptionManager.RegisterXor(xorKey);
+
+        // Encrypt the original string using XOR
+        string encrypted = EncryptionManager.Encrypt(EncryptType.Xor, original);
+        Debug.Log($"Encrypted: {encrypted}");
+
+        // Decrypt the XOR result back to original
+        string decrypted = EncryptionManager.Decrypt(EncryptType.Xor, encrypted);
+        Debug.Log($"Decrypted: {decrypted}");
+    }
+
+    void TestAes(string original)
+    {
+        Debug.Log("=== AES Test ===");
+
+        // Register AES encryption with a string key
+        EncryptionManager.RegisterAes(aesKey);
+
+        // Encrypt the original string using AES
+        string encrypted = EncryptionManager.Encrypt(EncryptType.Aes, original);
+        Debug.Log($"Encrypted: {encrypted}");
+
+        // Decrypt the AES result back to original
+        string decrypted = EncryptionManager.Decrypt(EncryptType.Aes, encrypted);
+        Debug.Log($"Decrypted: {decrypted}");
+    }
+
+    void TestHash(string original)
+    {
+        Debug.Log("=== HASH Test ===");
+
+        // Register PBKDF2 hashing with a specified number of iterations
+        HashManager.RegisterPbkdf2(10000);
+
+        // Generate a hash from the original data
+        // The result typically contains both salt and hash combined
+        string hash = HashManager.Hash(HashType.Pbkdf2, original);
+        Debug.Log($"Hash: {hash}");
+
+        // Verify the original data against the generated hash (expected: true)
+        bool isValid = HashManager.Verify(HashType.Pbkdf2, original, hash);
+        Debug.Log($"Verify (correct): {isValid}");
+
+        // Verify with incorrect data (expected: false)
+        bool isInvalid = HashManager.Verify(
+            HashType.Pbkdf2,
+            "Baby, got me looking so crazy\nppajyeobeorineun daydream",
+            hash
+        );
+        Debug.Log($"Verify (wrong): {isInvalid}");
+    }
+}
+```
