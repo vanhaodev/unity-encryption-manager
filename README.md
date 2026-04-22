@@ -4,7 +4,8 @@ A simple encryption and hashing library for Unity.
 
 ## Installation
 
-Copy the `com.vanhaodev.encryptionmanager` folder to your Unity project's `Assets` folder.
+- [Latest Release](https://github.com/vanhaodev/unity-sound-manager/releases/latest)
+- [All Releases](https://github.com/vanhaodev/unity-sound-manager/releases)
 
 ## Encryption
 
