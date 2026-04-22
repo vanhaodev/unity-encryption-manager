@@ -4,8 +4,8 @@ A simple encryption and hashing library for Unity.
 
 ## Installation
 
-- [Latest Release](https://github.com/vanhaodev/unity-sound-manager/releases/latest)
-- [All Releases](https://github.com/vanhaodev/unity-sound-manager/releases)
+- [Latest Release](https://github.com/vanhaodev/unity-encryption-manager/releases/latest)
+- [All Releases](https://github.com/vanhaodev/unity-encryption-manager/releases)
 
 ## Encryption
 
