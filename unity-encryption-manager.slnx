@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="com.vanhaodev.encryptionmanager.csproj" />
+  <Project Path="com.vanhaodev.encryptionmanager.tests.editor.csproj" />
+  <Project Path="com.vanhaodev.encryptionmanager.tests.csproj" />
+</Solution>
