@@ -1,6 +1,6 @@
 {
   "name": "com.vanhaodev.encryptionmanager",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "displayName": "Encryption Manager",
   "description": "A lightweight Unity encryption library designed for beginners. Provides simple APIs for XOR, AES encryption, string protection, save data security, and password hashing. Minimal setup, fast integration, and easy to use.",
   "unity": "6000.0",
