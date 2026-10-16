@@ -146,6 +146,21 @@ Open **Tools > Encryption Manager > Test UI** in Unity Editor to test encryption
 | `EncryptAsync(type, data)` | Async encrypt (background thread) |
 | `DecryptAsync(type, data)` | Async decrypt (background thread) |
 
+### AesEncryption (large files)
+
+| Method | Description |
+|--------|-------------|
+| `OpenDecryptStream(Stream source, long dataOffset = 0, bool ownsSource = true)` | Decrypt on the fly while reading: a read-only, seekable plaintext stream that never loads the whole file into memory (~256 KB buffer). Same format as `Decrypt`. |
+| `OpenDecryptStream(string path, long dataOffset = 0)` | Same, over a file on disk |
+
+```csharp
+var aes = new AesEncryption(key);
+using var plain = aes.OpenDecryptStream("video.enc");   // or any seekable Stream
+var bundle = AssetBundle.LoadFromStream(plain);          // keep the stream open while in use
+```
+
+A wrong key throws `CryptographicException` when the stream is opened (checked on the last block).
+
 ### HashManager
 
 | Method | Description |
